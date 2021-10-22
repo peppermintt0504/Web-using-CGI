@@ -10,20 +10,9 @@ form = cgi.FieldStorage()
 if 'id' in form:
     pageId = form["id"].value
     description = open('data/'+pageId,'r').read()
-    update_link = '<a href="update.py?id={name}">update</a>'.format(name = pageId)
-    delete_action = '''
-        <form action = "process_delete.py" method="post">
-            <input type = "hidden" name = "pageId" value = "{}">
-            <input type = "submit" value="delete">
-        </form>
-
-    '''.format(pageId)
 else:
     pageId = 'Welcome'
     description = 'Hello Web'
-    update_link = ''
-    delete_action =''
-
 
 data_li = listdir('data')
 
@@ -45,11 +34,14 @@ print('''
     {data_list}
     </ol>
     <a href="create.py">create</a>
-    {update_link}
-    {delete_action}
-    <h2>{title}</h2>
-    <p>{desc}</p>
+    <form action="process_update.py" method="post">
+        <input type="hidden" name = "pageId" value = {form_default_title}>
+        <p><input type = "text" name = "title" placeholder="title" value = "{form_default_title}"></p>
+        <p><textarea row = "4" name = "description"
+        placeholder="description">{form_default_description}</textarea></p>
+        <p><input type="submit"></p>
+    </form>  
 </body>
 </html>
 '''
-.format(title=pageId, desc = description, data_list = listStr,update_link = update_link, delete_action = delete_action ))
+.format(title=pageId, desc = description, data_list = listStr, form_default_title =pageId, form_default_description = description))
