@@ -1,0 +1,1 @@
+Bitnami를 이용하여 서버를 열어 GCI web 만들기 과정
