@@ -2,7 +2,7 @@
 print("content-type:text/html; charset=UTF-8\n")
 print()
 
-import cgi
+import cgi,view
 from os import listdir
 
 form = cgi.FieldStorage()
@@ -14,11 +14,6 @@ else:
     pageId = 'Welcome'
     description = 'Hello Web'
 
-data_li = listdir('data')
-
-listStr=''
-for item in data_li:
-    listStr = listStr + '<li><a href = "index.py?id={name}">{name}</a></li>'.format(name=item)
 
 
 print('''
@@ -42,4 +37,4 @@ print('''
 </body>
 </html>
 '''
-.format(title=pageId, desc = description, data_list = listStr))
+.format(title=pageId, desc = description, data_list = view.getList()))

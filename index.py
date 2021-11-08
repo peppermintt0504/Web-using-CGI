@@ -2,7 +2,7 @@
 print("content-type:text/html; charset=UTF-8\n")
 print()
 
-import cgi
+import cgi, view
 from os import listdir
 
 form = cgi.FieldStorage()
@@ -52,4 +52,9 @@ print('''
 </body>
 </html>
 '''
-.format(title=pageId, desc = description, data_list = listStr,update_link = update_link, delete_action = delete_action ))
+.format(
+title=pageId,
+desc = description,
+data_list = view.getList(),
+update_link = update_link,
+delete_action = delete_action))
